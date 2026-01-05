@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Password Generator</h2>
+    
+    <div class="result-container">
+      <input type="text" id="password-display" readonly placeholder="Your password">
+      <button id="copy-btn">Copy</button>
+    </div>
+
+    <div class="settings">
+      <label>
+        Length: <span id="length-value">12</span>
+        <input type="range" id="length-slider" min="8" max="32" value="12">
+      </label>
+
+      <label>
+        <input type="checkbox" id="include-uppercase" checked> Include Uppercase
+      </label>
+      <label>
+        <input type="checkbox" id="include-numbers" checked> Include Numbers
+      </label>
+      <label>
+        <input type="checkbox" id="include-symbols" checked> Include Symbols
+      </label>
+    </div>
+
+    <button id="generate-btn" class="main-btn">Generate Password</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
