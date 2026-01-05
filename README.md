@@ -8,7 +8,7 @@ An extension for Chromium-based browsers that generates cryptographically secure
 - **One-click Copy:** Quickly copy generated passwords to your clipboard.
 - **Manifest V3:** Built with the latest Chrome extension standards.
 
-## How to Install (Local Development)
+## How to Install
 1. Clone this repository.
 2. Open Chrome and navigate to `chrome://extensions/`.
 3. Enable **"Developer mode"** (top right).
