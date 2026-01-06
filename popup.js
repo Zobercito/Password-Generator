@@ -5,32 +5,62 @@ function getRandomValues(max) {
     return array[0] % max;
 }
 
-// Function to update the strength bar visual
+// Function to update the strength bar visual - improved logic
 function updateStrengthMeter(password) {
     const strengthBar = document.getElementById('strength-bar');
     let strength = 0;
 
-    // 1. Scoring based on Length (Max 50 points)
-    // High length is rewarded heavily to ensure 20+ chars reach "Strong" status easily
+    // 1. Length scoring - more balanced
     if (password.length >= 8) strength += 10;
-    if (password.length >= 12) strength += 15;
-    if (password.length >= 20) strength += 25; 
-
-    // 2. Scoring based on Character Variety (Max 50 points)
-    if (/[A-Z]/.test(password)) strength += 15;
-    if (/[0-9]/.test(password)) strength += 15;
-    if (/[^A-Za-z0-9]/.test(password)) strength += 20;
-
-    // Ensure the score does not exceed 100%
-    if (strength > 100) strength = 100;
-
+    if (password.length >= 12) strength += 10;  // Reduced from 15
+    if (password.length >= 16) strength += 15;  // Added intermediate step
+    if (password.length >= 20) strength += 15;  // Reduced from 25
+    
+    // 2. Character variety - more balanced weighting
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSymbols = /[^A-Za-z0-9]/.test(password);
+    
+    // Count unique character types (0-4)
+    const uniqueTypes = [hasUpper, hasLower, hasNumbers, hasSymbols]
+        .filter(Boolean).length;
+    
+    // Reward more for variety than individual checks
+    if (uniqueTypes >= 4) strength += 40;  // All 4 types
+    else if (uniqueTypes >= 3) strength += 30;  // 3 types
+    else if (uniqueTypes >= 2) strength += 20;  // 2 types
+    else if (uniqueTypes >= 1) strength += 10;  // 1 type
+    
+    // 3. Bonus for password complexity (density of special chars)
+    const symbolCount = (password.match(/[^A-Za-z0-9]/g) || []).length;
+    if (symbolCount >= 3) strength += 10;
+    
+    const numberCount = (password.match(/[0-9]/g) || []).length;
+    if (numberCount >= 3) strength += 10;
+    
+    // 4. Penalize common weak patterns
+    const weakPatterns = [
+        /^[a-z]+$/,  // only lowercase
+        /^[A-Z]+$/,  // only uppercase
+        /^[0-9]+$/,  // only numbers
+        /(.)\1{4,}/  // 5+ repeated characters
+    ];
+    
+    if (weakPatterns.some(pattern => pattern.test(password))) {
+        strength = Math.max(20, strength - 20);  // Cap penalty
+    }
+    
+    // Ensure score is within 0-100
+    strength = Math.max(0, Math.min(100, strength));
+    
     // Apply width to the progress bar
     strengthBar.style.width = strength + "%";
-
-    // 3. Update colors based on the final score
+    
+    // 5. Updated thresholds for better categorization
     if (strength < 40) {
         strengthBar.style.backgroundColor = "#ef4444"; // Weak - Red
-    } else if (strength < 75) {
+    } else if (strength < 70) {  // Increased from 75
         strengthBar.style.backgroundColor = "#eab308"; // Medium - Yellow
     } else {
         strengthBar.style.backgroundColor = "#22c55e"; // Strong - Green
