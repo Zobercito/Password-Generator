@@ -32,6 +32,7 @@ h2 {
   letter-spacing: 1px;
 }
 
+/* Compact display section */
 .display-section {
   display: flex;
   background: var(--card-bg);
@@ -65,6 +66,7 @@ h2 {
 
 #copy-btn:hover { transform: scale(1.1); }
 
+/* Strength Meter */
 .strength-meter {
   height: 6px;
   background: var(--border);
@@ -75,12 +77,12 @@ h2 {
 
 #strength-bar {
   height: 100%;
-  width: 50%;
+  width: 0%;
   background: var(--primary);
   transition: width 0.4s ease, background-color 0.4s;
 }
 
-/* New layout for length input and generate button */
+/* Control Row: Length + Generate button */
 .control-row {
   display: flex;
   align-items: flex-end;
@@ -102,31 +104,34 @@ label { font-size: 0.85rem; color: var(--text-muted); }
   border-radius: 8px;
   color: var(--text-main);
   padding: 8px;
-  width: 65px;
+  width: 60px;
   outline: none;
   font-family: inherit;
   font-size: 1rem;
 }
 
+/* 2x2 Matrix for Checkboxes */
 .checkbox-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-top: 5px;
 }
 
 .checkbox-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   color: var(--text-main);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .checkbox-item input {
   width: 16px;
   height: 16px;
   accent-color: var(--primary);
+  cursor: pointer;
 }
 
 .generate-btn {

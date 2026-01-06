@@ -59,18 +59,26 @@ function updateStrengthMeter(password) {
 function generatePassword() {
     const length = document.getElementById('length-input').value;
     const hasUpper = document.getElementById('include-uppercase').checked;
+    const hasLower = document.getElementById('include-lowercase').checked;
     const hasNumber = document.getElementById('include-numbers').checked;
     const hasSymbol = document.getElementById('include-symbols').checked;
 
-    const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-    const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-    const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+    const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numberChars = "0123456789";
+    const symbolChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
-    let charPool = lowerCase;
-    if (hasUpper) charPool += upperCase;
-    if (hasNumber) charPool += numbers;
-    if (hasSymbol) charPool += symbols;
+    let charPool = "";
+    if (hasLower) charPool += lowerCaseChars;
+    if (hasUpper) charPool += upperCaseChars;
+    if (hasNumber) charPool += numberChars;
+    if (hasSymbol) charPool += symbolChars;
+
+    // Safety check: if no options are selected, default to lowercase
+    if (charPool === "") {
+        charPool = lowerCaseChars;
+        document.getElementById('include-lowercase').checked = true;
+    }
 
     let password = "";
     for (let i = 0; i < length; i++) {
