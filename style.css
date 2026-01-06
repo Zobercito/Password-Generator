@@ -1,21 +1,25 @@
 :root {
-  /* Dark Theme Variables */
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border: #334155;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
+  /* Dark Theme - Grayscale */
+  --bg-color: #0a0a0a;
+  --card-bg: #171717;
+  --text-main: #ededed;
+  --text-muted: #a1a1aa;
+  --border: #262626;
+  --primary: #ffffff;
+  --primary-hover: #e5e5e5;
+  --btn-text: #000000;
 }
 
 body.light-mode {
-  /* Light Theme Variables - High Contrast */
+  /* Light Theme - Grayscale */
   --bg-color: #ffffff;
-  --card-bg: #f1f5f9;
-  --text-main: #0f172a;
-  --text-muted: #475569;
-  --border: #cbd5e1;
+  --card-bg: #f4f4f5;
+  --text-main: #09090b;
+  --text-muted: #71717a;
+  --border: #e4e4e7;
+  --primary: #09090b;
+  --primary-hover: #27272a;
+  --btn-text: #ffffff;
 }
 
 body {
@@ -40,39 +44,30 @@ body {
   padding: 6px;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.2s;
   z-index: 10;
 }
 
-.theme-toggle:hover {
-  border-color: var(--primary);
-  transform: scale(1.05);
-}
+.theme-toggle:hover { border-color: var(--text-muted); }
 
-.theme-icon {
-  stroke: var(--text-main);
-}
-
-/* Rest of the UI elements using the variables */
 .container { display: flex; flex-direction: column; gap: 12px; }
 
 h2 {
   margin: 0;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
-  color: var(--primary);
-  letter-spacing: 1px;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .display-section {
   display: flex;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 4px 12px;
+  border-radius: 8px;
+  padding: 6px 12px;
   align-items: center;
 }
 
@@ -84,20 +79,19 @@ h2 {
   font-family: 'Courier New', monospace;
   font-size: 1.1rem;
   outline: none;
-  padding: 6px 0;
 }
 
 #copy-btn {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;
+  filter: grayscale(1);
 }
 
 .strength-meter {
-  height: 6px;
+  height: 4px;
   background: var(--border);
-  border-radius: 3px;
+  border-radius: 2px;
   margin-top: -5px;
   overflow: hidden;
 }
@@ -105,7 +99,7 @@ h2 {
 #strength-bar {
   height: 100%;
   width: 0%;
-  background: var(--primary);
+  /* Colors for strength stay functional (red, yellow, blue, green) */
   transition: width 0.4s ease, background-color 0.4s;
 }
 
@@ -117,16 +111,17 @@ h2 {
 
 .length-container { display: flex; flex-direction: column; gap: 4px; }
 
-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
 #length-input {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-main);
   padding: 8px;
   width: 50px;
   outline: none;
+  font-weight: bold;
 }
 
 .checkbox-grid {
@@ -141,24 +136,28 @@ label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
   gap: 8px;
   cursor: pointer;
   font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
+.checkbox-item:hover { color: var(--text-main); }
+
 .checkbox-item input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--primary);
+  width: 15px;
+  height: 15px;
+  accent-color: var(--text-main);
 }
 
 .generate-btn {
   flex: 1;
   background: var(--primary);
-  color: white;
+  color: var(--btn-text);
   border: none;
   padding: 10px;
-  border-radius: 8px;
-  font-weight: 700;
+  border-radius: 6px;
+  font-weight: 800;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: 0.2s;
 }
 
 .generate-btn:hover { background: var(--primary-hover); }
