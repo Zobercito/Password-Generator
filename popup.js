@@ -88,10 +88,6 @@ function generatePassword() {
 
 document.getElementById('generate-btn').addEventListener('click', generatePassword);
 
-document.getElementById('length-input').addEventListener('input', () => {
-    generatePassword();
-});
-
 document.getElementById('copy-btn').addEventListener('click', () => {
     const passwordField = document.getElementById('password-display');
     if (!passwordField.value) return;
