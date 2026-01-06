@@ -1,7 +1,7 @@
 :root {
   --bg-dark: #0f172a;
   --card-bg: #1e293b;
-  --primary: #6366f1; /* Indigo */
+  --primary: #6366f1;
   --primary-hover: #4f46e5;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -32,7 +32,6 @@ h2 {
   letter-spacing: 1px;
 }
 
-/* Password Display */
 .display-section {
   display: flex;
   background: var(--card-bg);
@@ -66,7 +65,6 @@ h2 {
 
 #copy-btn:hover { transform: scale(1.1); }
 
-/* Strength Meter */
 .strength-meter {
   height: 6px;
   background: var(--border);
@@ -77,25 +75,37 @@ h2 {
 
 #strength-bar {
   height: 100%;
-  width: 50%; /* This will be handled by JS */
+  width: 50%;
   background: var(--primary);
   transition: width 0.4s ease, background-color 0.4s;
 }
 
-/* Settings */
-.range-container {
+/* New layout for length input and generate button */
+.control-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.length-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 15px;
+  gap: 5px;
 }
 
 label { font-size: 0.85rem; color: var(--text-muted); }
 
-input[type="range"] {
-  width: 100%;
-  accent-color: var(--primary);
-  cursor: pointer;
+#length-input {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-main);
+  padding: 8px;
+  width: 65px;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
 .checkbox-grid {
@@ -110,6 +120,7 @@ input[type="range"] {
   gap: 10px;
   cursor: pointer;
   color: var(--text-main);
+  font-size: 0.9rem;
 }
 
 .checkbox-item input {
@@ -118,18 +129,18 @@ input[type="range"] {
   accent-color: var(--primary);
 }
 
-/* Generate Button */
 .generate-btn {
+  flex: 1;
   background: var(--primary);
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .generate-btn:hover {
