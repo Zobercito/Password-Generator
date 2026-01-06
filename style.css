@@ -1,27 +1,62 @@
 :root {
-  --bg-dark: #0f172a;
+  /* Dark Theme Variables */
+  --bg-color: #0f172a;
   --card-bg: #1e293b;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border: #334155;
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+}
+
+body.light-mode {
+  /* Light Theme Variables - High Contrast */
+  --bg-color: #ffffff;
+  --card-bg: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border: #cbd5e1;
 }
 
 body {
   width: 320px;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-color);
   color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
   margin: 0;
-  padding: 10px 20px 20px 20px; 
+  padding: 15px 20px 20px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-.container {
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-main);
+  padding: 6px;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 12px; 
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
 }
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.theme-icon {
+  stroke: var(--text-main);
+}
+
+/* Rest of the UI elements using the variables */
+.container { display: flex; flex-direction: column; gap: 12px; }
 
 h2 {
   margin: 0;
@@ -32,7 +67,6 @@ h2 {
   letter-spacing: 1px;
 }
 
-/* Compact display section */
 .display-section {
   display: flex;
   background: var(--card-bg);
@@ -40,7 +74,6 @@ h2 {
   border-radius: 12px;
   padding: 4px 12px;
   align-items: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 #password-display {
@@ -51,8 +84,7 @@ h2 {
   font-family: 'Courier New', monospace;
   font-size: 1.1rem;
   outline: none;
-  width: 100%;
-  padding: 2px 0;
+  padding: 6px 0;
 }
 
 #copy-btn {
@@ -60,18 +92,13 @@ h2 {
   border: none;
   cursor: pointer;
   font-size: 1.1rem;
-  padding: 2px;
-  transition: transform 0.2s;
 }
 
-#copy-btn:hover { transform: scale(1.1); }
-
-/* Strength Meter */
 .strength-meter {
   height: 6px;
   background: var(--border);
   border-radius: 3px;
-  margin-top: -10px;
+  margin-top: -5px;
   overflow: hidden;
 }
 
@@ -82,21 +109,15 @@ h2 {
   transition: width 0.4s ease, background-color 0.4s;
 }
 
-/* Control Row: Length + Generate button */
 .control-row {
   display: flex;
   align-items: flex-end;
   gap: 12px;
-  margin-bottom: 5px;
 }
 
-.length-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+.length-container { display: flex; flex-direction: column; gap: 4px; }
 
-label { font-size: 0.85rem; color: var(--text-muted); }
+label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
 
 #length-input {
   background: var(--card-bg);
@@ -104,18 +125,14 @@ label { font-size: 0.85rem; color: var(--text-muted); }
   border-radius: 8px;
   color: var(--text-main);
   padding: 8px;
-  width: 60px;
+  width: 50px;
   outline: none;
-  font-family: inherit;
-  font-size: 1rem;
 }
 
-/* 2x2 Matrix for Checkboxes */
 .checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 5px;
+  gap: 8px;
 }
 
 .checkbox-item {
@@ -123,7 +140,6 @@ label { font-size: 0.85rem; color: var(--text-muted); }
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  color: var(--text-main);
   font-size: 0.85rem;
 }
 
@@ -131,7 +147,6 @@ label { font-size: 0.85rem; color: var(--text-muted); }
   width: 16px;
   height: 16px;
   accent-color: var(--primary);
-  cursor: pointer;
 }
 
 .generate-btn {
@@ -141,16 +156,9 @@ label { font-size: 0.85rem; color: var(--text-muted); }
   border: none;
   padding: 10px;
   border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s;
 }
 
-.generate-btn:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-}
-
-.generate-btn:active { transform: translateY(0); }
+.generate-btn:hover { background: var(--primary-hover); }
