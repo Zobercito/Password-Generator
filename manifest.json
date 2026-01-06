@@ -1,15 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Password Generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A lightweight browser extension to generate cryptographically strong passwords.",
-  
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -18,6 +16,5 @@
       "128": "icons/icon128.png"
     }
   },
-
-  "permissions": ["clipboardWrite"]
+  "permissions": ["clipboardWrite", "storage"]
 }
