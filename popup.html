@@ -2,35 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h2>Password Generator</h2>
+    <h2>SecurePass</h2>
     
-    <div class="result-container">
-      <input type="text" id="password-display" readonly placeholder="Your password">
-      <button id="copy-btn">Copy</button>
+    <div class="display-section">
+      <input type="text" id="password-display" readonly>
+      <button id="copy-btn" title="Copy to clipboard">
+        <span>📋</span>
+      </button>
     </div>
 
-    <div class="settings">
-      <label>
-        Length: <span id="length-value">12</span>
+    <div class="strength-meter">
+      <div id="strength-bar"></div>
+    </div>
+
+    <div class="settings-section">
+      <div class="range-container">
+        <label>Length: <span id="length-value">12</span></label>
         <input type="range" id="length-slider" min="8" max="32" value="12">
-      </label>
+      </div>
 
-      <label>
-        <input type="checkbox" id="include-uppercase" checked> Include Uppercase
-      </label>
-      <label>
-        <input type="checkbox" id="include-numbers" checked> Include Numbers
-      </label>
-      <label>
-        <input type="checkbox" id="include-symbols" checked> Include Symbols
-      </label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item">
+          <input type="checkbox" id="include-uppercase" checked> 
+          <span>Uppercase</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="include-numbers" checked> 
+          <span>Numbers</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="include-symbols" checked> 
+          <span>Symbols</span>
+        </label>
+      </div>
     </div>
 
-    <button id="generate-btn" class="main-btn">Generate Password</button>
+    <button id="generate-btn" class="generate-btn">Generate New Password</button>
   </div>
   <script src="popup.js"></script>
 </body>
