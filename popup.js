@@ -3,11 +3,15 @@ const themeToggle = document.getElementById('theme-toggle');
 const sunIcon = document.getElementById('sun-icon');
 const moonIcon = document.getElementById('moon-icon');
 
-// Initialize theme from storage safely
+// Al abrir el popup, revisamos inmediatamente el almacenamiento
 if (typeof chrome !== "undefined" && chrome.storage) {
     chrome.storage.local.get(['theme'], (result) => {
+        // Si el tema guardado es 'light', aplicamos el modo luz
         if (result.theme === 'light') {
             applyTheme(true);
+        } else {
+            // Por defecto es oscuro, así que nos aseguramos de que esté en modo oscuro
+            applyTheme(false);
         }
     });
 }
@@ -28,7 +32,7 @@ themeToggle.addEventListener('click', () => {
     const isLight = document.body.classList.toggle('light-mode');
     applyTheme(isLight);
     
-    // Save preference
+    // Guardamos la preferencia
     if (typeof chrome !== "undefined" && chrome.storage) {
         chrome.storage.local.set({ theme: isLight ? 'light' : 'dark' });
     }
@@ -111,13 +115,11 @@ function generatePassword() {
     }
 }
 
-// Event Listeners
 document.getElementById('generate-btn').addEventListener('click', generatePassword);
 document.getElementById('copy-btn').addEventListener('click', () => {
     const val = document.getElementById('password-display').value;
     if (val) {
         navigator.clipboard.writeText(val);
-        // Using a simple notification instead of alert for better UX
         const btn = document.getElementById('copy-btn');
         const originalText = btn.innerHTML;
         btn.innerHTML = "✅";
@@ -125,5 +127,5 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     }
 });
 
-// Initial generation
+// Generación inicial al cargar
 generatePassword();
