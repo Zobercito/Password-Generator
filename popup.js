@@ -10,21 +10,30 @@ function updateStrengthMeter(password) {
     const strengthBar = document.getElementById('strength-bar');
     let strength = 0;
 
-    if (password.length > 8) strength += 20;
-    if (password.length > 12) strength += 20;
-    if (/[A-Z]/.test(password)) strength += 20;
-    if (/[0-9]/.test(password)) strength += 20;
+    // 1. Scoring based on Length (Max 50 points)
+    // High length is rewarded heavily to ensure 20+ chars reach "Strong" status easily
+    if (password.length >= 8) strength += 10;
+    if (password.length >= 12) strength += 15;
+    if (password.length >= 20) strength += 25; 
+
+    // 2. Scoring based on Character Variety (Max 50 points)
+    if (/[A-Z]/.test(password)) strength += 15;
+    if (/[0-9]/.test(password)) strength += 15;
     if (/[^A-Za-z0-9]/.test(password)) strength += 20;
 
+    // Ensure the score does not exceed 100%
+    if (strength > 100) strength = 100;
+
+    // Apply width to the progress bar
     strengthBar.style.width = strength + "%";
 
-    // Change color based on strength
-    if (strength <= 40) {
-        strengthBar.style.backgroundColor = "#ef4444"; // Red
-    } else if (strength <= 80) {
-        strengthBar.style.backgroundColor = "#eab308"; // Yellow
+    // 3. Update colors based on the final score
+    if (strength < 40) {
+        strengthBar.style.backgroundColor = "#ef4444"; // Weak - Red
+    } else if (strength < 75) {
+        strengthBar.style.backgroundColor = "#eab308"; // Medium - Yellow
     } else {
-        strengthBar.style.backgroundColor = "#22c55e"; // Green
+        strengthBar.style.backgroundColor = "#22c55e"; // Strong - Green
     }
 }
 
