@@ -8,55 +8,51 @@ function updateStrengthMeter(password) {
     const strengthBar = document.getElementById('strength-bar');
     let strength = 0;
 
+    // 1. Scoring based on Length (Max 50 points)
     if (password.length >= 8) strength += 10;
     if (password.length >= 12) strength += 10;
     if (password.length >= 16) strength += 15;
     if (password.length >= 20) strength += 15;
     
+    // 2. Scoring based on Character Variety (Max 40 points)
     const hasUpper = /[A-Z]/.test(password);
     const hasLower = /[a-z]/.test(password);
     const hasNumbers = /[0-9]/.test(password);
     const hasSymbols = /[^A-Za-z0-9]/.test(password);
     
-    const uniqueTypes = [hasUpper, hasLower, hasNumbers, hasSymbols]
-        .filter(Boolean).length;
+    const uniqueTypes = [hasUpper, hasLower, hasNumbers, hasSymbols].filter(Boolean).length;
     
     if (uniqueTypes >= 4) strength += 40;
     else if (uniqueTypes >= 3) strength += 30;
     else if (uniqueTypes >= 2) strength += 20;
     else if (uniqueTypes >= 1) strength += 10;
     
-    const symbolCount = (password.match(/[^A-Za-z0-9]/g) || []).length;
-    if (symbolCount >= 3) strength += 10;
-    
-    const numberCount = (password.match(/[0-9]/g) || []).length;
-    if (numberCount >= 3) strength += 10;
-    
-    const weakPatterns = [
-        /^[a-z]+$/,
-        /^[A-Z]+$/,
-        /^[0-9]+$/,
-        /(.)\1{4,}/
-    ];
-    
+    // 3. Pattern penalties
+    const weakPatterns = [/(.)\1{4,}/];
     if (weakPatterns.some(pattern => pattern.test(password))) {
-        strength = Math.max(20, strength - 20);
+        strength = Math.max(0, strength - 20);
     }
     
+    // Ensure the score stays between 0 and 100
     strength = Math.max(0, Math.min(100, strength));
     
-    let displayWidth = strength;
-    if (strength >= 85) displayWidth = 100;
+    // VISUAL LOGIC: 
+    // We want the bar to be 100% width if it reaches the Green threshold (50 points).
+    // Otherwise, we scale it proportionally so it reaches 100% exactly at 50 points.
+    let displayWidth = strength * 2; 
+    if (displayWidth > 100) displayWidth = 100;
+
     strengthBar.style.width = displayWidth + "%";
     
-    if (strength < 40) {
-        strengthBar.style.backgroundColor = "#ef4444";
-    } else if (strength < 70) {
-        strengthBar.style.backgroundColor = "#eab308";
-    } else if (strength < 85) {
-        strengthBar.style.backgroundColor = "#3b82f6";
+    // COLOR THRESHOLDS (Based on the original 1-100 score)
+    if (strength < 15) {
+        strengthBar.style.backgroundColor = "#ef4444"; // Weak (Red)
+    } else if (strength < 30) {
+        strengthBar.style.backgroundColor = "#eab308"; // Medium (Yellow)
+    } else if (strength < 50) {
+        strengthBar.style.backgroundColor = "#3b82f6"; // Strong (Blue)
     } else {
-        strengthBar.style.backgroundColor = "#22c55e";
+        strengthBar.style.backgroundColor = "#22c55e"; // Very Strong (Green)
     }
 }
 
