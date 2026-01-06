@@ -14,18 +14,18 @@ body {
   color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 10px 20px 20px 20px; 
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px; 
 }
 
 h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
   color: var(--primary);
