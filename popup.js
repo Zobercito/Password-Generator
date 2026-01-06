@@ -54,16 +54,20 @@ function updateStrengthMeter(password) {
     // Ensure score is within 0-100
     strength = Math.max(0, Math.min(100, strength));
     
-    // Apply width to the progress bar
-    strengthBar.style.width = strength + "%";
+    // 5. Apply width to the progress bar with special handling for strong passwords
+    let displayWidth = strength;
+    if (strength >= 85) displayWidth = 100; // Very strong passwords = full bar
+    strengthBar.style.width = displayWidth + "%";
     
-    // 5. Updated thresholds for better categorization
+    // 6. Updated thresholds for more realistic assessment
     if (strength < 40) {
         strengthBar.style.backgroundColor = "#ef4444"; // Weak - Red
-    } else if (strength < 70) {  // Increased from 75
+    } else if (strength < 70) {  // Adjusted threshold
         strengthBar.style.backgroundColor = "#eab308"; // Medium - Yellow
+    } else if (strength < 85) {  // Added "Strong" level
+        strengthBar.style.backgroundColor = "#3b82f6"; // Strong - Blue
     } else {
-        strengthBar.style.backgroundColor = "#22c55e"; // Strong - Green
+        strengthBar.style.backgroundColor = "#22c55e"; // Very Strong - Green
     }
 }
 
